@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>SAC UI Experience - Landing Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Fonts: Montserrat + Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --vanilla: #F3E5AB;
+            --linen: #FAF0E6;
+            --preto: #2D2D2D;
+            --cinza: #D3C9B8;
+            --cinza2: #C0B8A9;
+            --cinza3: #B0A899;
+            --branco: #fff;
+            --rosa: #FF69B4;
+            --amarelo: #FFD600;
+            --amarelo-hover: #FFEB3B;
+            --rosa-claro: #FFB6D5;
+            --gradient: linear-gradient(90deg, #ffb6d5 0%, #ffd600 100%);
+        }
+        html, body {
+            margin: 0; padding: 0;
+            font-family: 'Poppins', Arial, sans-serif;
+            background: var(--linen);
+            color: var(--preto);
+            min-height: 100vh;
+            width: 100vw;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        body:before {
+            content: "";
+            position: fixed;
+            z-index: 0;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: url('data:image/svg+xml;utf8,<svg width="1920" height="1080" xmlns="http://www.w3.org/2000/svg"><ellipse cx="1600" cy="200" rx="420" ry="180" fill="%23F3E5AB" fill-opacity="0.23"/><ellipse cx="300" cy="900" rx="340" ry="120" fill="%23FFB6D5" fill-opacity="0.18"/><ellipse cx="1100" cy="700" rx="300" ry="100" fill="%23FFD600" fill-opacity="0.11"/></svg>');
+            background-size: cover;
+            background-repeat: no-repeat;
+            pointer-events: none;
+        }
+        header {
+            width: 100%;
+            background: var(--vanilla);
+            padding: 38px 0 18px 0;
+            text-align: center;
+            box-shadow: 0 2px 12px 0 rgba(243, 229, 171, 0.18);
+            z-index: 1;
+            position: relative;
+        }
+        .ui-title {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 3em;
+            color: var(--preto);
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 12px #fff7;
+        }
+        .ui-subtitle {
+            color: var(--preto);
+            font-size: 1.2em;
+            letter-spacing: 1px;
+            margin-bottom: 0;
+            opacity: 0.85;
+        }
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 48px;
+            padding: 48px 0 32px 0;
+            background: transparent;
+            flex-wrap: wrap;
+            z-index: 1;
+            position: relative;
+        }
+        .hero-content {
+            max-width: 500px;
+            text-align: left;
+        }
+        .hero-title {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 2.4em;
+            font-weight: 700;
+            color: var(--preto);
+            margin-bottom: 18px;
+        }
+        .hero-desc {
+            font-size: 1.18em;
+            color: var(--cinza3);
+            margin-bottom: 32px;
+            line-height: 1.5;
+        }
+        .hero-cta {
+            background: var(--gradient);
+            color: var(--preto);
+            border: none;
+            padding: 16px 42px;
+            font-size: 1.15em;
+            font-family: 'Montserrat', Arial, sans-serif;
+            border-radius: 14px;
+            cursor: pointer;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 20px 0 var(--rosa-claro);
+            transition: background 0.3s, transform 0.2s;
+        }
+        .hero-cta:focus { outline: 2px solid var(--rosa); }
+        .hero-cta:hover {
+            background: linear-gradient(90deg, var(--amarelo) 0%, var(--rosa) 100%);
+            transform: scale(1.04);
+        }
+        .hero-img {
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            background: var(--vanilla);
+            box-shadow: 0 4px 32px 0 var(--rosa-claro);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .hero-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(0.1) contrast(1.1);
+        }
+        main {
+            flex-grow: 1;
+            width: 100vw;
+            max-width: 100vw;
+            padding: 24px 48px 0 48px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            justify-content: center;
+            align-items: flex-start;
+            overflow-y: auto;
+            background: transparent;
+            margin: 0;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 1;
+        }
+        /* Ajuste no formulÃ¡rio para direcionar para a rota de e-mail */
+        form {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            justify-content: center;
+            align-items: stretch;
+            position: relative;
+        }
+        .form-col {
+            background: rgba(250,240,230,0.98);
+            border-radius: 24px;
+            padding: 24px 20px 20px 20px;
+            box-shadow: 0 2px 12px 0 var(--rosa-claro);
+            flex: 1 1 320px;
+            max-width: 400px;
+            min-width: 280px;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            transition: box-shadow 0.3s, transform 0.2s;
+            box-sizing: border-box;
+        }
+        .form-col:hover {
+            box-shadow: 0 8px 32px 0 var(--rosa);
+            transform: translateY(-6px) scale(1.03);
+        }
+        .section-title {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 1.3em;
+            color: var(--rosa);
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+        textarea, input[type="text"] {
+            width: 100%;
+            box-sizing: border-box;
+            min-height: 110px;
+            padding: 14px;
+            font-size: 1.08em;
+            border-radius: 14px;
+            border: 2px solid var(--rosa);
+            margin-bottom: 8px;
+            font-family: 'Poppins', Arial, sans-serif;
+            background: var(--linen);
+            color: var(--preto);
+            transition: border-color 0.3s, box-shadow 0.3s;
+            resize: vertical;
+        }
+        textarea:focus, input[type="text"]:focus {
+            border-color: var(--amarelo);
+            outline: none;
+            box-shadow: 0 0 12px var(--rosa-claro);
+        }
+        .date-textarea {
+            min-height: 80px;
+        }
+        .stars {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: flex-end;
+            gap: 8px;
+            font-size: 2.4em;
+            margin-bottom: 12px;
+            position: relative;
+        }
+        .stars input {
+            display: none;
+        }
+        .stars label {
+            color: var(--cinza3);
+            cursor: pointer;
+            transition: color 0.2s, transform 0.2s;
+            filter: drop-shadow(0 2px 2px #0002);
+            position: relative;
+        }
+        .stars input:checked ~ label,
+        .stars label:hover,
+        .stars label:hover ~ label {
+            color: var(--amarelo);
+            transform: scale(1.2);
+            text-shadow: 0 0 10px var(--amarelo-hover);
+            z-index: 1;
+        }
+        .stars label[title]:hover:after {
+            content: attr(title);
+            position: absolute;
+            background: var(--rosa);
+            color: var(--branco);
+            font-size: 0.9em;
+            padding: 4px 12px;
+            border-radius: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            top: -44px;
+            white-space: nowrap;
+            z-index: 10;
+            pointer-events: none;
+            opacity: 0.95;
+        }
+        .satisfacao-title {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 1.15em;
+            color: var(--rosa);
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+            text-align: left;
+            font-weight: bold;
+        }
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 12px;
+            align-items: flex-start;
+        }
+        .checkbox-custom {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--vanilla);
+            padding: 10px 16px;
+            border-radius: 12px;
+            border: 2px solid var(--rosa);
+            color: var(--rosa);
+            font-size: 1em;
+            transition: border-color 0.3s, background 0.3s, color 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            font-weight: 600;
+            position: relative;
+            user-select: none;
+            box-shadow: 0 1px 6px 0 var(--rosa-claro);
+        }
+        .checkbox-custom input[type="checkbox"] {
+            accent-color: var(--rosa);
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        .checkbox-custom:hover, .checkbox-custom input[type="checkbox"]:checked + span {
+            border-color: var(--amarelo);
+            background: var(--rosa-claro);
+            color: var(--preto);
+            box-shadow: 0 2px 12px 0 var(--amarelo-hover);
+        }
+        .button-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin: 40px 0 0 0;
+        }
+        .submit-btn {
+            background: var(--gradient);
+            color: var(--preto);
+            border: none;
+            padding: 22px 70px 22px 60px;
+            font-size: 1.5em;
+            font-family: 'Montserrat', Arial, sans-serif;
+            border-radius: 22px;
+            cursor: pointer;
+            box-shadow: 0 8px 36px 0 var(--rosa-claro), 0 2px 12px 0 var(--amarelo-hover);
+            transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+            font-weight: 800;
+            letter-spacing: 1.3px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            outline: none;
+        }
+        .submit-btn:active {
+            transform: scale(0.97);
+            box-shadow: 0 2px 8px 0 var(--rosa-claro);
+        }
+        .submit-btn .btn-icon {
+            display: inline-block;
+            width: 36px;
+            height: 36px;
+            background: transparent;
+            margin-right: 0;
+            margin-left: -8px;
+            vertical-align: middle;
+            transition: transform 0.2s;
+        }
+        .submit-btn:hover .btn-icon {
+            transform: scale(1.2) rotate(-8deg);
+        }
+        .submit-btn .btn-text {
+            display: inline-block;
+            vertical-align: middle;
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-weight: 800;
+        }
+        .submit-btn:after {
+            content: "";
+            display: block;
+            position: absolute;
+            left: 0; top: 0; right: 0; bottom: 0;
+            background: linear-gradient(90deg, #fff4 0%, #fff0 100%);
+            opacity: 0;
+            transition: opacity 0.2s;
+            border-radius: 22px;
+            pointer-events: none;
+        }
+        .submit-btn:active:after {
+            opacity: 1;
+        }
+        .parabens { /* Mensagem de sucesso apÃ³s o envio */
+            text-align: center;
+            color: var(--rosa);
+            font-size: 2em;
+            margin-top: 20px;
+            font-weight: bold;
+            background: var(--vanilla);
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px var(--rosa-claro);
+        }
+        @keyframes parabensAnim {
+            from { opacity: 0; transform: scale(0.7);}
+            to { opacity: 1; transform: scale(1);}
+        }
+        .services-section {
+            width: 100%;
+            max-width: 1200px;
+            margin: 48px auto 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .services-cards {
+            display: flex;
+            gap: 28px;
+            flex-wrap: wrap;
+            margin-top: 24px;
+            justify-content: center;
+        }
+        .service-card {
+            background: var(--vanilla);
+            border-radius: 20px;
+            padding: 18px 20px;
+            box-shadow: 0 2px 10px 0 var(--amarelo-hover);
+            min-width: 180px;
+            max-width: 240px;
+            font-size: 1.12em;
+            color: var(--preto);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            border: 2px solid var(--rosa);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .service-card:hover {
+            transform: translateY(-8px) scale(1.05) rotate(-2deg);
+            box-shadow: 0 8px 32px 0 var(--rosa);
+            background: var(--rosa-claro);
+        }
+        .service-card .service-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: var(--rosa);
+        }
+        footer {
+            width: 100%;
+            background: rgba(250,240,230,0.95);
+            text-align: center;
+            color: var(--cinza3);
+            font-size: 1em;
+            padding: 18px 0 10px 0;
+            letter-spacing: 1px;
+            font-family: 'Montserrat', Arial, sans-serif;
+            box-shadow: 0 -2px 12px 0 #fff4;
+            z-index: 1;
+        }
+        @media (max-width: 1200px) {
+            main {
+                max-width: 97vw;
+                padding: 18px 12px 0 12px;
+                gap: 18px;
+            }
+            .form-col {
+                flex: 1 1 45%;
+                max-width: 45%;
+            }
+        }
+        @media (max-width: 800px) {
+            main {
+                max-width: 99vw;
+                padding: 8px 2vw 0 2vw;
+                gap: 12px;
+            }
+            form {
+                gap: 12px;
+            }
+            .form-col {
+                flex: 1 1 100%;
+                max-width: 100%;
+            }
+            .stars {
+                justify-content: center;
+            }
+            .checkbox-group {
+                align-items: center;
+            }
+            .submit-btn {
+                padding: 16px 20vw 16px 16vw;
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="ui-title">UI.<span style="color:var(--rosa);font-size:0.6em;"> SAC</span></div>
+        <div class="ui-subtitle">Seu feedback é essencial para a nossa evolução!</div>
+    </header>
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-title">Quero te proporcionar uma experiência INCRÍVEL</div>
+            <div class="hero-desc">
+                Pensando nisso, essa página foi criada para que você se expresse sem julgamentos. Sua opinião faz toda a diferença e nos ajuda a manter a harmonia e o diálogo, evitando surtos que podem ferir minha integridade física!
+            </div>
+            <a href="#feedback-form"><button class="hero-cta">Quero Avaliar</button></a>
+        </div>
+        <div class="hero-img">
+            <img src="https://i.pinimg.com/736x/69/54/ca/6954ca9b868cc54fc084b2c6e1ecce9f.jpg" alt="Casal apaixonado">
+        </div>
+    </section>
+
+    <main>
+<!-- MODIFICADO: action do formulário aponta para /enviar-email -->
+<form method="post" action="/enviar-email" autocomplete="off" id="feedback-form">
+    <div class="form-col">
+        <div class="section-title">Sugestões</div>
+        <textarea name="sugestoes" placeholder="Deixe aqui suas sugestões..." aria-label="Sugestões"></textarea>
+    </div>
+    <div class="form-col">
+        <div class="section-title">Reclamações</div>
+        <textarea name="reclamacoes" placeholder="Descreva sua reclamação..." aria-label="Reclamações"></textarea>
+    </div>
+    <div class="form-col">
+        <div class="section-title">Elogios</div>
+        <textarea name="elogios" placeholder="Compartilhe seus elogios..." aria-label="Elogios"></textarea>
+    </div>
+    <div class="form-col">
+        <div class="section-title">Possíveis Melhorias</div>
+        <textarea name="melhorias" placeholder="Ideias para melhorar nosso serviço..." aria-label="Possíveis Melhorias"></textarea>
+    </div>
+    <div class="form-col">
+        <div class="section-title">Nota geral</div>
+        <div class="stars" title="Clique para avaliar" role="radiogroup" aria-label="Nota geral">
+            <input type="radio" id="star5" name="nota" value="5"><label for="star5" title="Excelente" aria-label="Nota 5">&#9733;</label>
+            <input type="radio" id="star4" name="nota" value="4"><label for="star4" title="Muito bom" aria-label="Nota 4">&#9733;</label>
+            <input type="radio" id="star3" name="nota" value="3"><label for="star3" title="Bom" aria-label="Nota 3">&#9733;</label>
+            <input type="radio" id="star2" name="nota" value="2"><label for="star2" title="Regular" aria-label="Nota 2">&#9733;</label>
+            <input type="radio" id="star1" name="nota" value="1"><label for="star1" title="Ruim" aria-label="Nota 1">&#9733;</label>
+        </div>
+    </div>
+    <div class="form-col">
+        <div class="satisfacao-title">Como você avalia sua satisfação?</div>
+        <div class="checkbox-group" role="group" aria-label="Satisfação">
+            <label class="checkbox-custom"><input type="checkbox" name="satisfacao" value="Muito satisfeito"><span>Muito satisfeito</span></label>
+            <label class="checkbox-custom"><input type="checkbox" name="satisfacao" value="Satisfeito"><span>Satisfeito</span></label>
+            <label class="checkbox-custom"><input type="checkbox" name="satisfacao" value="Indiferente"><span>Indiferente</span></label>
+            <label class="checkbox-custom"><input type="checkbox" name="satisfacao" value="Insatisfeito"><span>Insatisfeito</span></label>
+            <label class="checkbox-custom"><input type="checkbox" name="satisfacao" value="Muito insatisfeito"><span>Muito insatisfeito</span></label>
+        </div>
+    </div>
+    <div class="form-col">
+        <div class="section-title">Ideias para o próximo date</div>
+        <textarea name="date" class="date-textarea" placeholder="Sugira um próximo encontro..." aria-label="Ideias para o próximo date"></textarea>
+    </div>
+    <div style="flex-basis: 100%; height: 0;"></div>
+    <div class="button-wrapper">
+        <button class="submit-btn" type="submit" aria-label="Enviar feedback">
+            <span class="btn-icon">
+                <svg width="36" height="36" viewBox="0 0 32 32" fill="none">
+                    <path d="M3 29L29 16L3 3L3 13L23 16L3 19L3 29Z" fill="#FF69B4" stroke="#FFD600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+            <span class="btn-text">Enviar feedback</span>
+        </button>
+    </div>
+    <!-- Mensagem de parabéns será exibida aqui via JavaScript -->
+    <div id="parabens"></div>
+</form>
+
+    </main>
+    <section class="services-section">
+    <h2 style="font-family: 'Montserrat', Arial, sans-serif; font-size:2em; color:var(--rosa);margin-bottom:0;">Nossos Serviços</h2>
+    <div class="services-cards">
+        <div class="service-card">
+            <div class="service-icon">💖</div>
+            Trato com carinho em cada momento, até no cafezinho
+        </div>
+        <div class="service-card">
+            <div class="service-icon">🚗</div>
+            Abro a porta do carro para você, então aguarde
+        </div>
+        <div class="service-card">
+            <div class="service-icon">🍽️</div>
+            Puxo a cadeira no jantar, pra ganhar o coração
+        </div>
+        <div class="service-card">
+            <div class="service-icon">💆‍♂️</div>
+            Faço massagem para relaxar e demonstrar cuidado (e ganhar pontos extras)
+        </div>
+        <div class="service-card">
+            <div class="service-icon">😂</div>
+            Sou engraçado, mando memes e piadas ruins para alegrar seu dia
+        </div>
+        <div class="service-card">
+            <div class="service-icon">🔥</div>
+            Um gostoso que vai te motivar na academia (ou pelo menos tentar)
+        </div>
+        <div class="service-card">
+            <div class="service-icon">🎤</div>
+            Cantor de chuveiro profissional, serenatas garantidas (volume opcional)
+        </div>
+        <div class="service-card">
+            <div class="service-icon">🍫</div>
+            Especialista em distribuir chocolates e sorrisos (e comer junto)
+        </div>
+    </div>
+</section>
+
+    <footer>
+        &copy; 2025 UI SAC &middot; Design clean, responsivo e profissional &middot; Powered by Flask
+    </footer>
+</body>
+<script src="app.js"></script>
+</html>
