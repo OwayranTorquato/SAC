@@ -20,7 +20,7 @@ document.getElementById('feedback-form').addEventListener('submit', async functi
     const parabensDiv = document.getElementById('parabens');
     parabensDiv.innerHTML = '';
     try {
-        const response = await fetch('/enviar-email', {
+        const response = await fetch('/api/enviar-email', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body)
