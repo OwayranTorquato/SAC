@@ -1,6 +1,6 @@
-const nodemailer = require('nodemailer');
+import nodemailer from 'nodemailer';
 
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
     if (req.method !== 'POST') {
         return res.status(405).json({ message: 'Método não permitido' });
     }
@@ -23,7 +23,7 @@ Melhorias: ${melhorias || '-'}
 Nota: ${nota || '-'}
 Satisfação: ${satisfacao || '-'}
 Ideias para o próximo date: ${date || '-'}
-  `;
+    `;
 
     try {
         await transporter.sendMail({
@@ -34,6 +34,7 @@ Ideias para o próximo date: ${date || '-'}
         });
         res.status(200).json({ message: 'Feedback enviado com sucesso! Obrigado.' });
     } catch (error) {
+        console.error('Erro ao enviar e-mail:', error);
         res.status(500).json({ message: 'Erro ao enviar o feedback.' });
     }
-};
+}
