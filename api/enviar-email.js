@@ -34,7 +34,8 @@ Ideias para o próximo date: ${date || '-'}
         });
         res.status(200).json({ message: 'Feedback enviado com sucesso! Obrigado.' });
     } catch (error) {
-        console.error('Erro ao enviar e-mail:', error);
-        res.status(500).json({ message: 'Erro ao enviar o feedback.' });
-    }
+    console.error('Erro ao enviar o feedback:', error);
+    res.status(500).json({ message: 'Erro ao enviar o feedback.', detalhe: error.message });
 }
+}
+
